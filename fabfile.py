@@ -3,7 +3,8 @@ import time
 
 from fabric.api import *
 
-import hostsdb
+import utils
+from utils import set_env_for_script
 
 import ops
 
@@ -24,6 +25,7 @@ def run_sh_script(cmd):
 	put (cmd, fn, mode = 0700)
 	run (fn)
 
+
 @task(alias='R')
 def run_sh(*argv):
 	if len(argv) == 0:
@@ -39,12 +41,13 @@ def run_sh(*argv):
 		fout = open(fn, 'w')
 		fout.write(sys.stdin.read())
 		fout.close()
+		set_env_for_script(fn, env)
 		execute(run_sh_script, fn)
 		# Read Script from standard input
 	elif cmd.startswith('>>>'):
 		execute(run_sh_oneline, cmd[3:])
 	else:
+		set_env_for_script(cmd, env)
 		execute(run_sh_script, cmd)
-		
 		
 # vim:ts=2 ai
