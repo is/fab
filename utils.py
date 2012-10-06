@@ -54,7 +54,11 @@ def set_env_for_script(fn, env):
 		value = value.strip()
 		if key == 'roles':
 			value = value.split(',')
-		setattr(env, key, value)
+
+		if key == 'user':
+			setattr(env, key, value)
+		elif getattr(env, key) == None:
+			setattr(env, key, value)
 
 			
 # vim:ts=2 ai

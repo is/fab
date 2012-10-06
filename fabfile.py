@@ -40,12 +40,12 @@ def run_sh(*argv):
 		fout.write(sys.stdin.read())
 		fout.close()
 		set_env_for_script(fn, env)
-		execute(run_sh_script, fn)
+		run_sh_script(fn)
 		# Read Script from standard input
 	elif cmd.startswith('>>>'):
-		execute(run_sh_oneline, cmd[3:])
+		run_sh_oneline(cmd[3:])
 	else:
 		set_env_for_script(cmd, env)
-		execute(run_sh_script, cmd)
+		run_sh_script(cmd)
 		
 # vim:ts=2 ai
