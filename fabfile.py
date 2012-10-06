@@ -8,17 +8,15 @@ from utils import set_env_for_script
 
 import ops
 
-@task
+@task(alias='VH')
 def verify_hostname():
 	"""Verify host up & output hostname"""
 	run ('hostname')
 
 
-@task
 def run_sh_oneline(cmd):
 	run(cmd)
 
-@task(alias='R__')
 def run_sh_script(cmd):
 	'''Run shell script on remote machines by SSH'''
 	fn = '/tmp/%s_%s' % (cmd.replace('/', '__'), int(time.time()))

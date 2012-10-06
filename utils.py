@@ -26,6 +26,8 @@ def __build_hostdb(fn):
 			if c.find('{') != -1 or c.find('=') != - 1 or c.find(':') != -1:
 				continue
 			__append_hostdb(DB, c, hostname)
+			if c.startswith('I__'):
+				__append_hostdb(DB, c[3:], hostname)
 
 	fin.close()
 	return DB
