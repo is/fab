@@ -3,11 +3,13 @@ import time
 
 from fabric.api import *
 
+
 def __append_hostdb(db, key, h):
 	if key in db:
 		db[key].append(h)
 	else:
 		db[key] = [h,]
+
 
 def __build_hostdb(fn):
 	DB = {}
@@ -34,6 +36,8 @@ def __build_hostdb(fn):
 
 env.roledefs = __build_hostdb('/root/.fabric/hosts')
 
+
+#----
 def set_env_for_script(fn, env):
 	fin = file(fn, 'r')
 	lines = fin.readlines()
@@ -60,5 +64,4 @@ def set_env_for_script(fn, env):
 		elif getattr(env, key) == None:
 			setattr(env, key, value)
 
-			
-# vim:ts=2 ai
+# vim:ts=2 sts=2 ai

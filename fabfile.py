@@ -8,6 +8,12 @@ from utils import set_env_for_script
 
 import ops
 
+
+# --- local modules
+import h4a
+# --- end
+
+
 @task(alias='VH')
 def verify_hostname():
 	"""Verify host up & output hostname"""
@@ -26,6 +32,7 @@ def run_sh_script(cmd):
 
 @task(alias='R')
 def run_sh(*argv):
+	'''Run shell scripts on remote machines.'''
 	if len(argv) == 0:
 		cmd = None
 	else:
@@ -47,5 +54,5 @@ def run_sh(*argv):
 	else:
 		set_env_for_script(cmd, env)
 		run_sh_script(cmd)
-		
+
 # vim:ts=2 ai
