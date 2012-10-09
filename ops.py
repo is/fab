@@ -1,4 +1,6 @@
 from fabric.api import *
+from fabric.contrib.project import *
+
 
 @task
 def rsync_yum_repos():
@@ -14,5 +16,12 @@ def set_is_hostid():
 	run('mkdir -p /is/etc')
 	run('echo %s > /is/etc/hostid.is' % io8id)
 	put('resource/is-hostid.sh', '/etc/profile.d')
+
+#----
+@task
+def install_java_7():
+	run('mkdir -p /is')
+	rsync_project('/is/java', '/is/java-deploy/', delete=True, extra_opts='-a')
+	put('resource/java7.sh', '/etc/profile.d/java7.sh')
 
 # vim:ts=2 ai
