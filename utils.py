@@ -13,6 +13,8 @@ def __append_hostdb(db, key, h):
 
 def __build_hostdb(fn):
 	DB = {}
+	io8id = {}
+	io8idr = {}
 
 	fin = file(fn)
 	cin = csv.reader(fin)
@@ -30,6 +32,11 @@ def __build_hostdb(fn):
 			__append_hostdb(DB, c, hostname)
 			if c.startswith('I__'):
 				__append_hostdb(DB, c[3:], hostname)
+				io8id[c[3:]] = hostname
+				io8idr[hostname] = c[3:]
+
+	env.io8id = io8id
+	env.io8idr = io8idr
 
 	fin.close()
 	return DB
